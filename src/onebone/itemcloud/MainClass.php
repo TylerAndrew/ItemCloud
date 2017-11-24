@@ -71,7 +71,7 @@ class MainClass extends PluginBase implements Listener{
 		}
 	}
 
-	public function execute(CommandSender $sender, string $label, array $params): bool{
+	public function onCommand(CommandSender $sender, Command $command, string $label, array $params): bool{
 		switch($command->getName()){
 			case "itemcloud":
 				if(!$sender instanceof Player){
@@ -180,7 +180,8 @@ class MainClass extends PluginBase implements Listener{
 						}
 						$output = "[ItemCloud] Item list : \n";
 						foreach($this->clouds[$name]->getItems() as $item => $count){
-							$output .= "$item : $count\n";
+							$itemName = Item::get((int)$item)->getName();
+							$output .= "$itemName : $count\n";
 						}
 						$sender->sendMessage($output);
 						break;
